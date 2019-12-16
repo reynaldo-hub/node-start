@@ -1,0 +1,38 @@
+{
+  "name": "node-start",
+  "version": "1.0.0",
+  "description": "node-start",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "dev:start": "clear; nodemon --exec babel-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reynaldo-hub/node-start.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reynaldo-hub/node-start/issues"
+  },
+  "homepage": "https://github.com/reynaldo-hub/node-start#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1",
+    "mongoose-validation-error-handler": "^2.0.3",
+    "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "nodemon": "^2.0.2"
+  }
+}

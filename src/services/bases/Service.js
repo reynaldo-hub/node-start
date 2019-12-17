@@ -53,10 +53,9 @@ class Service {
 				data: item,
 			};
 		} catch (error) {
-			console.log(transformMongooseError(error, { capitalize: false, humanize: false }));
 			return {
 				message: error.errmsg || 'Not able to create item',
-				errors: error.errors,
+				errors: transformMongooseError(error, { capitalize: false, humanize: false }),
 			};
 		}
 	}
@@ -69,8 +68,8 @@ class Service {
 					item,
 				};
 			}
-			item.set(data);
-			item = await this.model.save(item);
+			item = data;
+			item = await this.model.save();
 			return {
 				item,
 			};

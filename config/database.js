@@ -1,8 +1,6 @@
 import mongoose from 'mongoose';
 
-const server = '127.0.0.1:27017';
-const database = 'node-start';
-const url = process.env.MONGODB_URI || `mongodb://${server}/${database}`;
+const url = process.env.MONGODB_URI;
 
 class Connection {
 	constructor() {

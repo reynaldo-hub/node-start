@@ -1,6 +1,6 @@
-import Controller from './bases/Controller';
-import PersonService from '../services/PersonService';
-import Person from '../models/Person';
+import Controller from './bases/Controller.js';
+import PersonService from '../services/PersonService.js';
+import Person from '../models/Person.js';
 
 const personService = new PersonService(
 	new Person().getInstance(),

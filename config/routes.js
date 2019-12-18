@@ -1,4 +1,4 @@
-import PersonController from '../src/controllers/PersonController';
+import PersonController from '../src/controllers/PersonController.js';
 
 export default (server) => {
 	server.get('/api/persons', PersonController.getAll);

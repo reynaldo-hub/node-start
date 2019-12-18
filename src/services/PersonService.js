@@ -1,4 +1,4 @@
-import Service from './bases/Service';
+import Service from './bases/Service.js';
 
 class PersonService extends Service {
 

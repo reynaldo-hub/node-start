@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "node-start",
   "main": "index.js",
+  "events": {
+    "start": "node -e console.clear()"
+  },
   "scripts": {
     "start": "node -r esm index.js",
-    "dev:start": "clear; nodemon --exec babel-node index.js"
+    "dev:start": "clear; nodemon -r esm index.js"
   },
   "repository": {
     "type": "git",
@@ -27,10 +30,6 @@
     "validator": "^12.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.7.5",
-    "@babel/node": "^7.7.4",
-    "@babel/preset-env": "^7.7.6",
-    "babel-loader": "^8.0.6",
     "eslint": "^6.7.2",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.19.1",

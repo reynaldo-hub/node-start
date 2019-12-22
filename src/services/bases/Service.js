@@ -62,39 +62,40 @@ class Service {
 
 	async update(id, data) {
 		try {
-			let item = await this.model.findById(id);
-			if (!item) {
-				return {
-					item,
-				};
-			}
-			item = data;
-			item = await this.model.save();
+			const item = await this.model.findByIdAndUpdate(id, data, { new: true });
 			return {
+				statusCode: 202,
 				item,
 			};
-		} catch (errors) {
+		} catch (error) {
 			return {
-				errors,
+				statusCode: 500,
+				errors: transformMongooseError(error, { capitalize: false, humanize: false }),
 			};
 		}
 	}
 
 	async delete(id) {
 		try {
-			let item = await this.model.findById(id);
+			const item = await this.model.findByIdAndDelete(id);
 			if (!item) {
 				return {
-					item,
+					error: true,
+					statusCode: 404,
+					message: 'item not found',
 				};
 			}
-			item = await this.model.remove(item);
+
 			return {
+				error: false,
+				deleted: true,
+				statusCode: 202,
 				item,
 			};
 		} catch (errors) {
 			return {
-				errors,
+				statusCode: 500,
+				errors: transformMongooseError(errors, { capitalize: false, humanize: false }),
 			};
 		}
 	}

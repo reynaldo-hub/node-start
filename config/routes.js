@@ -7,7 +7,7 @@ export default (server) => {
 	server.post('/api/persons', PersonController.insert);
 	server.put('/api/persons/:id', PersonController.update);
 	server.delete('/api/persons/:id', PersonController.delete);
-	server.get('/debug-sentry', () => {
+	server.get('/api/debug-sentry', () => {
 		try {
 			throw new Error('My first Sentry error!');
 		} catch (error) {
@@ -18,7 +18,7 @@ export default (server) => {
 					username: 'John Wick',
 				},
 			);
-			Sentry.captureException(new Error('Something broke'));
+			Sentry.captureException(new Error('Something broke without sentry dsn'));
 		}
 	});
 };

@@ -4,7 +4,6 @@ import * as Sentry from '@sentry/node';
 import setRoutes from './routes.js';
 
 Sentry.init({
-	dsn: 'https://5847fbaec48242aeb458141074b7eb25@sentry.io/1864371',
 	debug: true,
 });
 

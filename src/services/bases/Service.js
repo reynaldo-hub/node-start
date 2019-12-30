@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import transformMongooseError from 'mongoose-validation-error-handler';
+import Response from '../../helpers/response.js';
 
 class Service {
 	constructor(model) {
@@ -50,13 +51,11 @@ class Service {
 		try {
 			const item = await this.model.create(data);
 			return {
+				statusCode: 201,
 				data: item,
 			};
 		} catch (error) {
-			return {
-				message: error.errmsg || 'Not able to create item',
-				errors: transformMongooseError(error, { capitalize: false, humanize: false }),
-			};
+			return Response.onError(error);
 		}
 	}
 

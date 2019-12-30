@@ -32,10 +32,7 @@ class Controller {
 
 	async insert(req, res) {
 		const response = await this.service.insert(req.body);
-		if (response.errors) {
-			return res.status(500).send(response);
-		}
-		return res.status(201).send(response);
+		return res.status(response.statusCode).send(response);
 	}
 
 	async update(req, res) {

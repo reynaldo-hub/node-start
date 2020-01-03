@@ -9,53 +9,32 @@ class Controller {
 	}
 
 	async getAll(req, res) {
-		const response = await this.service.getAll(req.query);
-		if (response.errors) {
-			return res.status(500).end();
-		}
-		if (!response.data) {
-			return res.status(404).end();
-		}
-		return res.status(200).send(response);
+		const data = await this.service.getAll(req.query);
+		return res.status(data.statusCode).send(data);
 	}
 
 	async get(req, res) {
-		const response = await this.service.get(req.params);
-		if (response.errors) {
-			return res.status(500).end();
-		}
-		if (!response.data) {
-			return res.status(404).end();
-		}
-		return res.status(200).send(response);
+		const data = await this.service.getAll(req.query);
+		return res.status(data.statusCode).send(data);
 	}
 
 	async insert(req, res) {
-		const response = await this.service.insert(req.body);
-		if (response.errors) {
-			return res.status(500).send(response);
-		}
-		return res.status(201).send(response);
+		const data = await this.service.insert(req.body);
+		return res.status(data.statusCode).send(data);
 	}
 
 	async update(req, res) {
 		const { id } = req.params;
 
-		const response = await this.service.update(id, req.body);
-		if (response.errors) {
-			return res.status(500).send(response);
-		}
-		return res.status(200).send(response);
+		const data = await this.service.update(id, req.body);
+		return res.status(data.statusCode).send(data);
 	}
 
 	async delete(req, res) {
 		const { id } = req.params;
 
-		const response = await this.service.delete(id);
-		if (response.errors) {
-			return res.status(500).send(response);
-		}
-		return res.status(200).send(response);
+		const data = await this.service.delete(id);
+		return res.status(data.statusCode).send(data);
 	}
 }
 

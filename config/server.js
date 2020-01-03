@@ -9,7 +9,6 @@ Sentry.init({
 
 const server = express();
 
-// The request handler must be the first middleware on the app
 server.use(Sentry.Handlers.requestHandler());
 server.use(bodyParser.json());
 setRoutes(server);

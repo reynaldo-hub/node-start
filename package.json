@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/reynaldo-hub/node-start#readme",
   "dependencies": {
+    "@sentry/node": "^5.10.2",
     "body-parser": "^1.19.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
@@ -35,5 +36,8 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.19.1",
     "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "13.4.0"
   }
 }

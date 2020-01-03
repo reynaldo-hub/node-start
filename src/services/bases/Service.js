@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import transformMongooseError from 'mongoose-validation-error-handler';
-import Response from '../../helpers/response.js';
+import _ from 'lodash';
+import Response from '../../helpers/Response.js';
 
 class Service {
 	constructor(model) {
@@ -25,13 +25,13 @@ class Service {
 			try {
 				subquery._id = new mongoose.mongo.ObjectId(query._id);
 			} catch (error) {
-				// console.log('not able to generate mongoose id with content', query._id);
+				return Response.onError(error);
 			}
 		}
 
 		try {
 			const items = await this.model
-				.find(query)
+				.find(subquery)
 				.skip(skip)
 				.limit(limit);
 			const total = await this.model.countDocuments();
@@ -39,11 +39,10 @@ class Service {
 			return {
 				data: items,
 				total,
+				statusCode: _.isEmpty(items) ? 404 : 200,
 			};
-		} catch (errors) {
-			return {
-				errors,
-			};
+		} catch (error) {
+			return Response.onError(error);
 		}
 	}
 
@@ -62,40 +61,38 @@ class Service {
 	async update(id, data) {
 		try {
 			const item = await this.model.findByIdAndUpdate(id, data, { new: true });
+			if (_.isEmpty(item)) {
+				return {
+					statusCode: 404,
+					data: item,
+				};
+			}
+
 			return {
 				statusCode: 202,
 				item,
 			};
 		} catch (error) {
-			return {
-				statusCode: 500,
-				errors: transformMongooseError(error, { capitalize: false, humanize: false }),
-			};
+			return Response.onError(error);
 		}
 	}
 
 	async delete(id) {
 		try {
 			const item = await this.model.findByIdAndDelete(id);
-			if (!item) {
+			if (_.isEmpty(item)) {
 				return {
-					error: true,
 					statusCode: 404,
-					message: 'item not found',
+					data: item,
 				};
 			}
 
 			return {
-				error: false,
-				deleted: true,
 				statusCode: 202,
-				item,
+				data: item,
 			};
-		} catch (errors) {
-			return {
-				statusCode: 500,
-				errors: transformMongooseError(errors, { capitalize: false, humanize: false }),
-			};
+		} catch (error) {
+			return Response.onError(error);
 		}
 	}
 }

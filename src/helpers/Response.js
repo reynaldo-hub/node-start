@@ -10,6 +10,13 @@ class Response {
 			};
 		}
 
+		if (ex.name === 'JsonWebTokenError') {
+			return {
+				statusCode: 401,
+				errors: [{ message: 'invalid token' }],
+			};
+		}
+
 		Sentry.setUser(
 			{
 				email: 'john.wick@example.com',
